@@ -14,6 +14,7 @@ import Line9Image from "../../assets/images/line9.png";
 //components
 import SideBar from "../../components/SideBar";
 import InputStation from "../../components/InputStation";
+import InputTime from "../../components/InputTime";
 const Main = () => {
   const [selectedLine, setSelectedLine] = useState("2호선");
 
@@ -48,8 +49,7 @@ const Main = () => {
       )}
       <InputContainer>
         <InputItem>
-          지하철 탑승시간
-          <input type="time" />
+          <InputTime />
         </InputItem>
         <InputItem>
           <InputStation text="탑승역" title="start" />
@@ -65,7 +65,7 @@ const Main = () => {
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
+  justify-content: center;
   align-items: center;
 `;
 
