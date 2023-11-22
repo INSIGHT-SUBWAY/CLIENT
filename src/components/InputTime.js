@@ -18,7 +18,6 @@ const InputTime = () => {
 
   return (
     <div>
-      지하철 탑승시간
       <input type="time" value={time} onChange={handleTimeChange} />
     </div>
   );

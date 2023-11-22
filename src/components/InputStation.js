@@ -13,6 +13,7 @@ const InputStation = ({ title, text }) => {
     localStorage.setItem(title, station);
   }, [station, title]);
 
+  //2호선 전체
   const line2Stations = [
     "강남역",
     "잠실역",
@@ -68,7 +69,7 @@ const InputStation = ({ title, text }) => {
 
   return (
     <div>
-      <label>{text}</label>
+      {/* <label>{text}</label> */}
       <select value={station} onChange={handleChange}>
         {line2Stations.map((station) => (
           <option key={station} value={station}>

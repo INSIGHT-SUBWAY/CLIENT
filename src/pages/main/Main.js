@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 //이미지
 import Line1Image from "../../assets/images/line1.png";
 import Line2Image from "../../assets/images/line2.png";
@@ -16,6 +17,7 @@ import SideBar from "../../components/SideBar";
 import InputStation from "../../components/InputStation";
 import InputTime from "../../components/InputTime";
 const Main = () => {
+  const navigate = useNavigate();
   const [selectedLine, setSelectedLine] = useState("2호선");
 
   const lineImages = {
@@ -49,15 +51,20 @@ const Main = () => {
       )}
       <InputContainer>
         <InputItem>
+          지하철 탑승시간
           <InputTime />
         </InputItem>
         <InputItem>
+          탑승역
           <InputStation text="탑승역" title="start" />
         </InputItem>
         <InputItem>
+          도착역
           <InputStation text="도착역" title="end" />
         </InputItem>
       </InputContainer>
+
+      <CustomBtn onClick={() => navigate("/analyze")}>탐색</CustomBtn>
     </MainContainer>
   );
 };
@@ -76,5 +83,13 @@ const InputContainer = styled.div`
 const InputItem = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 300px;
+`;
+const CustomBtn = styled.button`
+  width: 50px;
+  height: 20px;
 `;
 export default Main;
