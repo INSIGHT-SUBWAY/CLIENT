@@ -13,7 +13,7 @@ import Line9Image from "../../assets/images/line9.png";
 
 //components
 import SideBar from "../../components/SideBar";
-
+import InputStation from "../../components/InputStation";
 const Main = () => {
   const [selectedLine, setSelectedLine] = useState("2호선");
 
@@ -46,6 +46,18 @@ const Main = () => {
           height="400px"
         />
       )}
+      <InputContainer>
+        <InputItem>
+          지하철 탑승시간
+          <input type="time" />
+        </InputItem>
+        <InputItem>
+          <InputStation text="탑승역" title="start" />
+        </InputItem>
+        <InputItem>
+          <InputStation text="도착역" title="end" />
+        </InputItem>
+      </InputContainer>
     </MainContainer>
   );
 };
@@ -55,5 +67,14 @@ const MainContainer = styled.div`
   flex-direction: column;
   /* justify-content: center; */
   align-items: center;
+`;
+
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const InputItem = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 export default Main;
