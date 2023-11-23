@@ -65,8 +65,7 @@ const Main = () => {
         </InputItem>
       </InputContainer>
 
-      <CustomBtn onClick={() => navigate("/analyze")} />
-      {/* <CustomBtn onClick={() => navigate("/analyze")}>탐색</CustomBtn> */}
+      <CustomBtn onClick={() => navigate("/loader")} />
     </MainContainer>
   );
 };
