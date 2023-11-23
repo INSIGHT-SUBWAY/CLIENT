@@ -50,6 +50,9 @@ const Loader = () => {
         <div class="leg leg-right"></div>
         <div class="schoolbag"></div>
       </div>
+      <LoadingText>
+        최적의 동선을 찾는 중 입니다. 조금만 기다려주세요
+      </LoadingText>
     </LoaderContainer>
   );
 };
@@ -57,5 +60,8 @@ const Loader = () => {
 const LoaderContainer = styled.div`
   background: #000;
   height: 100vh;
+`;
+const LoadingText = styled.span`
+  color: white;
 `;
 export default Loader;
