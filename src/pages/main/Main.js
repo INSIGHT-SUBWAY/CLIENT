@@ -16,6 +16,7 @@ import Line9Image from "../../assets/images/line9.png";
 import SideBar from "../../components/SideBar";
 import InputStation from "../../components/InputStation";
 import InputTime from "../../components/InputTime";
+import CustomBtn from "../../components/button/button";
 const Main = () => {
   const navigate = useNavigate();
   const [selectedLine, setSelectedLine] = useState("2호선");
@@ -34,6 +35,35 @@ const Main = () => {
 
   const handleLineSelect = (line) => {
     setSelectedLine(line);
+  };
+
+  // API 함수
+  const sendToApi = async (data) => {
+    // api 호출 하고
+    // axios.post('/api/path', data)
+    // 예를 들어 2초후에 응답이 왔다고 가정해보고
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({ data: "API response data" });
+      }, 2000);
+    });
+  };
+  // API 호출 및 페이지 이동 처리
+  const handleSubmit = async () => {
+    // local 에 저장한 start, end, time 보내고
+    const response = await sendToApi({
+      start: localStorage.getItem("start"),
+      end: localStorage.getItem("end"),
+      time: localStorage.getItem("time"),
+    });
+
+    // 데이터 기다리는 동안 로더 페이지로 이동
+    navigate("/loader");
+
+    // 응답 대기 및 Analyze 페이지로 이동
+    setTimeout(() => {
+      navigate("/analyze", { state: { data: response.data } });
+    }, 3000);
   };
 
   return (
@@ -64,7 +94,7 @@ const Main = () => {
         </InputItem>
       </InputContainer>
 
-      <CustomBtn onClick={() => navigate("/analyze")}>탐색</CustomBtn>
+      <CustomBtn onClick={handleSubmit} />
     </MainContainer>
   );
 };
@@ -88,8 +118,5 @@ const InputItem = styled.div`
   margin-bottom: 10px;
   width: 300px;
 `;
-const CustomBtn = styled.button`
-  width: 50px;
-  height: 20px;
-`;
+
 export default Main;
