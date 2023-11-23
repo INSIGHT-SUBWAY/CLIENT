@@ -113,10 +113,10 @@ const InputContainer = styled.div`
 const InputItem = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
-  width: 300px;
+  margin-bottom: 15px;
+  width: 350px;
 `;
 
 export default Main;
