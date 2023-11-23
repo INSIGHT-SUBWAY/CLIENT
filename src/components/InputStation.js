@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import styled from "styled-components";
 const InputStation = ({ title, text }) => {
   //local에 저장할때 title: 지하철명
   //local에 start:__역, end:___역으로 저장됨
@@ -70,15 +71,33 @@ const InputStation = ({ title, text }) => {
   return (
     <div>
       {/* <label>{text}</label> */}
-      <select value={station} onChange={handleChange}>
+      <SelectContainer value={station} onChange={handleChange}>
         {line2Stations.map((station) => (
           <option key={station} value={station}>
             {station}
           </option>
         ))}
-      </select>
+      </SelectContainer>
     </div>
   );
 };
-
+const SelectContainer = styled.select`
+  width: 200px;
+  border: 1px solid #c4c4c4;
+  box-sizing: border-box;
+  border-radius: 10px;
+  padding: 12px 13px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  &:focus {
+    border: 1px solid #21d13f;
+    box-sizing: border-box;
+    border-radius: 10px;
+    outline: 1px solid #42f560;
+    border-radius: 10px;
+  }
+`;
 export default InputStation;
