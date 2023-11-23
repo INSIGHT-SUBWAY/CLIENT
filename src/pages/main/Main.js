@@ -16,6 +16,7 @@ import Line9Image from "../../assets/images/line9.png";
 import SideBar from "../../components/SideBar";
 import InputStation from "../../components/InputStation";
 import InputTime from "../../components/InputTime";
+import CustomBtn from "../../components/button/button";
 const Main = () => {
   const navigate = useNavigate();
   const [selectedLine, setSelectedLine] = useState("2호선");
@@ -64,7 +65,8 @@ const Main = () => {
         </InputItem>
       </InputContainer>
 
-      <CustomBtn onClick={() => navigate("/analyze")}>탐색</CustomBtn>
+      <CustomBtn onClick={() => navigate("/analyze")} />
+      {/* <CustomBtn onClick={() => navigate("/analyze")}>탐색</CustomBtn> */}
     </MainContainer>
   );
 };
@@ -88,8 +90,8 @@ const InputItem = styled.div`
   margin-bottom: 10px;
   width: 300px;
 `;
-const CustomBtn = styled.button`
-  width: 50px;
-  height: 20px;
-`;
+// const CustomBtn = styled.button`
+//   width: 50px;
+//   height: 20px;
+// `;
 export default Main;
