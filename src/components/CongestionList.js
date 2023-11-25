@@ -9,6 +9,11 @@ const ListContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: 768px) {
+    padding: 10px;
+    width: 350px;
+    flex-wrap: wrap;
+  }
 `;
 
 const ListItem = styled.div`
@@ -21,16 +26,17 @@ const ListItem = styled.div`
 const ListItemBox = styled.div`
   width: 0;
   height: 0;
-  border-bottom: 40px solid ${(props) => props.backgroundColor};
-  border-right: 30px solid transparent;
+
+  border-bottom: 35px solid ${(props) => props.backgroundColor};
+  border-right: 20px solid transparent;
   border-left: 40px solid ${(props) => props.backgroundColor};
   display: flex;
   justify-content: flex-end;
-  align-items: stretch;
   text-align: center;
   font-weight: 600;
-  font-size: 24px;
+  font-size: 26px;
   color: white;
+  box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.75);
 `;
 
 function CongestionList({ congestionList }) {

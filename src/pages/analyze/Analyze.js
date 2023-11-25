@@ -120,7 +120,6 @@ const AnalyzeContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-
   /* margin-bottom: 20px; */
 `;
 const AnalyzeHeader = styled.div`
@@ -129,11 +128,19 @@ const AnalyzeHeader = styled.div`
   align-items: center;
   justify-content: space-around;
   margin-bottom: 20px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
 `;
 const AnalyzeContext = styled.div`
   border-radius: 30px;
   padding: 50px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  @media (max-width: 768px) {
+    padding: 10px;
+    box-shadow: none;
+  }
 `;
 const FinalScore = styled.div`
   display: flex;
@@ -165,25 +172,34 @@ const DiscomfortLevelText = styled.span`
 const AnalyzeItem = styled.div`
   display: flex;
   flex-direction: row;
-  width: 1000px;
+  /* width: 1000px; */
   justify-content: flex-start;
   align-items: center;
   /* height: 70px; */
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+  }
 `;
 
 const InfoLists = styled.div`
   display: flex;
-  width: 100%;
+  width: 50vw;
+  /* width: 80%; */
   justify-content: space-around;
   align-items: center;
+  padding: 20px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
-const Subtitle = styled.span`
+const Subtitle = styled.div`
   border: none;
   display: flex;
   padding: 0.75rem 1.5rem;
-  width: 10rem;
-  /* background-color: var(--color-gray); */
+  width: 200px;
   color: black;
   font-size: 1rem;
   line-height: 2rem;
@@ -193,8 +209,6 @@ const Subtitle = styled.span`
   vertical-align: middle;
   align-items: center;
   border-radius: 0.5rem;
-  user-select: none;
-  /* gap: 0.75rem; */
   margin-right: 2rem;
   box-shadow: 0 4px 6px -1px var(--color-gray), 0 2px 4px -1px var(--color-gray);
 `;
