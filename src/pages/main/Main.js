@@ -94,7 +94,7 @@ const Main = () => {
         </InputItem>
       </InputContainer>
 
-      <CustomBtn onClick={handleSubmit} />
+      <CustomBtn onClick={handleSubmit} text="탐색하러 가기" />
     </MainContainer>
   );
 };
