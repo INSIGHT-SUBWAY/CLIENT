@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import IconFace from "../../components/IconFace";
-
+import CongestionList from "../../components/ConjestionList";
 const Analyze = () => {
   const dummy = {
     SUBWAYEND: "성수",
@@ -44,33 +44,35 @@ const Analyze = () => {
     <AnalyzeContainer>
       <h1>출근길에서 살아남기</h1>
       <AnalyzeHeader>
-        <p>지금 들어오는 {subwayData.SUBWAYEND} 행 열차</p>
-        <FinalScore>출근길 불쾌지수: {subwayData.DISCOMFORT_LEVEL}</FinalScore>
-        <IconFace discomfortScore={subwayData.DISCOMFORT_LEVEL} />
+        <div>지금 들어오는 {subwayData.SUBWAYEND} 행 열차</div>
+        <FinalScore>
+          <IconFace discomfortScore={subwayData.DISCOMFORT_LEVEL} />
+          출근길 불쾌지수: {subwayData.DISCOMFORT_LEVEL}
+        </FinalScore>
         <p>예상 도착 시간: {subwayData.ARRIVETIME}</p>
       </AnalyzeHeader>
-      <div>
-        <h2>혼잡도:</h2>
-        <ul>
-          {subwayData.CONGESTION_LIST.map((level, index) => (
-            <li key={index}>{level}</li>
-          ))}
-        </ul>
-      </div>
+      <CongestionList congestionList={subwayData.CONGESTION_LIST} />
     </AnalyzeContainer>
   );
 };
 
 const AnalyzeContainer = styled.div`
+  width: 100vw;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
 const AnalyzeHeader = styled.div`
+  width: 80%;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 const FinalScore = styled.div`
+  display: flex;
   font-weight: 800;
+  border: 1px;
 `;
 export default Analyze;
