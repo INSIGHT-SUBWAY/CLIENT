@@ -46,7 +46,10 @@ const Analyze = () => {
     <AnalyzeContainer>
       {/* <h1>출근길에서 살아남기</h1> */}
       <AnalyzeHeader>
-        <div>지금 들어오는 {subwayData.SUBWAYEND} 행 열차</div>
+        <div>
+          지금 들어오는
+          <b> {subwayData.SUBWAYEND} </b>행 열차
+        </div>
 
         <FinalScore>
           <IconFace discomfortScore={subwayData.DISCOMFORT_LEVEL} />
@@ -63,27 +66,28 @@ const Analyze = () => {
         {/* <IconFace discomfortScore={subwayData.DISCOMFORT_LEVEL} /> */}
       </AnalyzeItem>
       <AnalyzeItem>
-        <Subtitle>추천 탑승칸</Subtitle>
-        {/* <InfoLists> */}
-        <div>
-          <CircleInfo>{subwayData.CURRENT_MIN_CONGESTION_CAR}</CircleInfo>
-          <div>탑승최소혼잡도</div>
-        </div>
-        <div>
-          <CircleInfo>{subwayData.ROUTE_MIN_CONGESTION_CAR}</CircleInfo>
-          <div>경로최소혼잡도</div>
-        </div>
-        <div>
-          <CircleInfo>{subwayData.ROUTE_MINMIN_CONGESTION_CAR}</CircleInfo>
-          <div>경로중최소혼잡도</div>
-        </div>
-        {/* </InfoLists> */}
+        <Subtitle>📍 추천 탑승칸</Subtitle>
+        <InfoLists>
+          <div>
+            <CircleInfo>{subwayData.CURRENT_MIN_CONGESTION_CAR}</CircleInfo>
+            <div>탑승최소혼잡도</div>
+          </div>
+          <div>
+            <CircleInfo>{subwayData.ROUTE_MIN_CONGESTION_CAR}</CircleInfo>
+            <div>경로최소혼잡도</div>
+          </div>
+          <div>
+            <CircleInfo>{subwayData.ROUTE_MINMIN_CONGESTION_CAR}</CircleInfo>
+            <div>경로중최소혼잡도</div>
+          </div>
+        </InfoLists>
       </AnalyzeItem>
       <AnalyzeItem>
-        <Subtitle>경로간 평균 혼잡도</Subtitle>
-        {/* <div>경로간 평균 혼잡도</div> */}
+        <Subtitle>📍 경로간 평균 혼잡도</Subtitle>
+
         <CongestionList congestionList={subwayData.CONGESTION_LIST} />
       </AnalyzeItem>
+      <button>새로 분석하러 가기</button>
     </AnalyzeContainer>
   );
 };
@@ -135,14 +139,15 @@ const AnalyzeItem = styled.div`
   display: flex;
   flex-direction: row;
   width: 1000px;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
   /* height: 70px; */
 `;
 
 const InfoLists = styled.div`
   display: flex;
-  justify-content: space-between;
+  width: 100%;
+  justify-content: space-around;
   align-items: center;
 `;
 
@@ -150,10 +155,11 @@ const Subtitle = styled.span`
   border: none;
   display: flex;
   padding: 0.75rem 1.5rem;
+  width: 7rem;
   background-color: var(--color-gray);
   color: #ffffff;
   font-size: 0.75rem;
-  line-height: 1rem;
+  line-height: 2rem;
   font-weight: 700;
   text-align: center;
   text-transform: uppercase;
@@ -162,6 +168,7 @@ const Subtitle = styled.span`
   border-radius: 0.5rem;
   user-select: none;
   gap: 0.75rem;
+  margin-right: 2rem;
   box-shadow: 0 4px 6px -1px var(--color-gray), 0 2px 4px -1px var(--color-gray);
 `;
 const CircleInfo = styled.div`
@@ -176,5 +183,7 @@ const CircleInfo = styled.div`
   font-size: 1.5rem;
   box-shadow: 0 4px 6px -1px var(--color-green),
     0 2px 4px -1px var(--color-green);
+  font-weight: 700;
+  margin-bottom: 20px;
 `;
 export default Analyze;
