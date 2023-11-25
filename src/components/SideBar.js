@@ -24,15 +24,18 @@ const SideBar = ({ onLineSelect, selectedLine }) => {
 
 const SideBarContainer = styled.div`
   position: absolute;
-  left: 300px;
+  left: 20vw;
   top: 20vh;
-  width: 10vw;
   display: flex;
   flex-direction: column;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  //모바일 환경에서는 sidebar 숨기기
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Input = styled.input.attrs({ type: "radio" })`
