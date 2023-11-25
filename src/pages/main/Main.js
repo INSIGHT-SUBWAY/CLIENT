@@ -68,7 +68,7 @@ const Main = () => {
 
   return (
     <MainContainer>
-      <SideBar onLineSelect={handleLineSelect} />
+      <SideBar onLineSelect={handleLineSelect} selectedLine={selectedLine} />
 
       <h1>🚇 출근길에서 살아남기 🚇</h1>
       {selectedLine && (

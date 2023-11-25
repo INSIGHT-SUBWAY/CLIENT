@@ -1,6 +1,6 @@
 //호선 선택하는 부분
 import styled from "styled-components";
-const SideBar = ({ onLineSelect }) => {
+const SideBar = ({ onLineSelect, selectedLine }) => {
   return (
     <SideBarContainer>
       {Array.from({ length: 9 }, (_, i) => i + 1).map((line) => (
@@ -10,6 +10,7 @@ const SideBar = ({ onLineSelect }) => {
             name="subwayLine"
             value={`${line}호선`}
             onChange={() => onLineSelect(`${line}호선`)}
+            checked={selectedLine === `${line}호선`}
           />
           <Label htmlFor={`line-${line}`}>
             <Circle />
@@ -22,8 +23,8 @@ const SideBar = ({ onLineSelect }) => {
 };
 
 const SideBarContainer = styled.div`
-  position: fixed;
-  left: 250px;
+  position: absolute;
+  left: 300px;
   top: 20vh;
   width: 10vw;
   display: flex;
