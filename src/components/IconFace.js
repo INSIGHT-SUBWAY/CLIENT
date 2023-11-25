@@ -13,14 +13,14 @@ function IconFace({ discomfortScore }) {
 
   //일단 임의로 설정
   if (discomfortScore >= 70) {
-    icon = faFaceSmile;
-    iconColor = " var(--color-blue)";
+    icon = faFaceFrown;
+    iconColor = " var(--color-red)";
   } else if (discomfortScore >= 40) {
     icon = faFaceMeh;
     iconColor = "var(--color-yellow)";
   } else {
-    icon = faFaceFrown;
-    iconColor = "var(--color-red)";
+    icon = faFaceSmile;
+    iconColor = "var(--color-blue)";
   }
 
   const iconStyle = {

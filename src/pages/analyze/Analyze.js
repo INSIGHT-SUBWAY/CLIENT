@@ -1,15 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import Loader from "../loader/Loader";
 import styled from "styled-components";
-import {
-  faFaceSmile,
-  faFaceFrown,
-  faFaceMeh,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+//pages
+import Loader from "../loader/Loader";
+
+//components
 import IconFace from "../../components/IconFace";
 import CongestionList from "../../components/ConjestionList";
+
 const Analyze = () => {
   const dummy = {
     SUBWAYEND: "성수",
