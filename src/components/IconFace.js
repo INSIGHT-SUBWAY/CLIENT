@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFaceSmile,
@@ -8,13 +8,14 @@ import {
 import "../style/color.css";
 
 function IconFace({ discomfortScore }) {
+  const [hovered, setHovered] = useState(false);
+
   let icon = null;
   let iconColor = "";
 
-  //일단 임의로 설정
   if (discomfortScore >= 70) {
     icon = faFaceFrown;
-    iconColor = " var(--color-red)";
+    iconColor = "var(--color-red)";
   } else if (discomfortScore >= 40) {
     icon = faFaceMeh;
     iconColor = "var(--color-yellow)";
@@ -25,10 +26,15 @@ function IconFace({ discomfortScore }) {
 
   const iconStyle = {
     color: iconColor,
+    transform: hovered ? "scale(1.1)" : "scale(1)",
+    transition: "transform 0.3s",
   };
 
   return (
-    <div>
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       <FontAwesomeIcon icon={icon} size="3x" style={iconStyle} />
     </div>
   );

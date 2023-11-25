@@ -46,12 +46,12 @@ const Analyze = () => {
 
   return (
     <AnalyzeContainer>
-      {/* <h1>출근길에서 살아남기</h1> */}
+      <ProjectText>🚇 출근길에서 살아남기 🚇</ProjectText>
       <AnalyzeHeader>
-        <div>
+        <ProjectText2>
           지금 들어오는
           <b> {subwayData.SUBWAYEND} </b>행 열차
-        </div>
+        </ProjectText2>
 
         <FinalScore>
           <IconFace discomfortScore={subwayData.DISCOMFORT_LEVEL} />
@@ -61,40 +61,58 @@ const Analyze = () => {
           </DiscomfortLevelText>{" "}
           점
         </FinalScore>
-        <div>예상 도착 시간: {subwayData.ARRIVETIME}</div>
-      </AnalyzeHeader>
-      <AnalyzeItem>
-        <Subtitle>🚆 실시간 열차 혼잡도</Subtitle>
-        <CongestionList congestionList={subwayData.CONGESTION_LIST} />
-        {/* <IconFace discomfortScore={subwayData.DISCOMFORT_LEVEL} /> */}
-      </AnalyzeItem>
-      <AnalyzeItem>
-        <Subtitle>🧚 추천 탑승칸</Subtitle>
-        <InfoLists>
-          <div>
-            <CircleInfo>{subwayData.CURRENT_MIN_CONGESTION_CAR}</CircleInfo>
-            <div>탑승 최소 혼잡도</div>
-          </div>
-          <div>
-            <CircleInfo>{subwayData.ROUTE_MIN_CONGESTION_CAR}</CircleInfo>
-            <div>경로 최소 혼잡도</div>
-          </div>
-          <div>
-            <CircleInfo>{subwayData.ROUTE_MINMIN_CONGESTION_CAR}</CircleInfo>
-            <div>경로중 최소 혼잡도</div>
-          </div>
-        </InfoLists>
-      </AnalyzeItem>
-      <AnalyzeItem>
-        <Subtitle>📍 경로 간 평균 혼잡도</Subtitle>
 
-        <CongestionList congestionList={subwayData.CONGESTION_LIST} />
-      </AnalyzeItem>
+        <ProjectText2>
+          예상 도착 시간:
+          <br />
+          <b>{subwayData.ARRIVETIME}</b>
+        </ProjectText2>
+      </AnalyzeHeader>
+      <AnalyzeContext>
+        <AnalyzeItem>
+          <Subtitle>⏰ 실시간 열차 혼잡도</Subtitle>
+          <CongestionList congestionList={subwayData.CONGESTION_LIST} />
+          {/* <IconFace discomfortScore={subwayData.DISCOMFORT_LEVEL} /> */}
+        </AnalyzeItem>
+        <AnalyzeItem>
+          <Subtitle>🧚 추천 탑승칸</Subtitle>
+          <InfoLists>
+            <div>
+              <CircleInfo>{subwayData.CURRENT_MIN_CONGESTION_CAR}</CircleInfo>
+              <div>탑승 최소 혼잡도</div>
+            </div>
+            <div>
+              <CircleInfo>{subwayData.ROUTE_MIN_CONGESTION_CAR}</CircleInfo>
+              <div>경로 최소 혼잡도</div>
+            </div>
+            <div>
+              <CircleInfo>{subwayData.ROUTE_MINMIN_CONGESTION_CAR}</CircleInfo>
+              <div>경로중 최소 혼잡도</div>
+            </div>
+          </InfoLists>
+        </AnalyzeItem>
+        <AnalyzeItem>
+          <Subtitle>📍 경로 간 평균 혼잡도</Subtitle>
+
+          <CongestionList congestionList={subwayData.CONGESTION_LIST} />
+        </AnalyzeItem>
+      </AnalyzeContext>
       <CustomBtn onClick={() => navigate("/")} text="새로 검색하기" />
     </AnalyzeContainer>
   );
 };
 
+const ProjectText = styled.span`
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 20px;
+`;
+const ProjectText2 = styled.span`
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-top: 20px;
+  text-align: center;
+`;
 const AnalyzeContainer = styled.div`
   width: 100vw;
   height: 90vh;
@@ -102,7 +120,8 @@ const AnalyzeContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  margin: 20px;
+
+  /* margin-bottom: 20px; */
 `;
 const AnalyzeHeader = styled.div`
   width: 900px;
@@ -110,6 +129,11 @@ const AnalyzeHeader = styled.div`
   align-items: center;
   justify-content: space-around;
   margin-bottom: 20px;
+`;
+const AnalyzeContext = styled.div`
+  border-radius: 30px;
+  padding: 50px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 `;
 const FinalScore = styled.div`
   display: flex;
@@ -159,8 +183,8 @@ const Subtitle = styled.span`
   display: flex;
   padding: 0.75rem 1.5rem;
   width: 10rem;
-  background-color: var(--color-gray);
-  color: #ffffff;
+  /* background-color: var(--color-gray); */
+  color: black;
   font-size: 1rem;
   line-height: 2rem;
   font-weight: 700;
@@ -188,5 +212,10 @@ const CircleInfo = styled.div`
     0 2px 4px -1px var(--color-green);
   font-weight: 700;
   margin-bottom: 20px;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 `;
 export default Analyze;

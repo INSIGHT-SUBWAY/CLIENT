@@ -3,8 +3,9 @@ import "../style/color.css";
 import styled from "styled-components";
 
 const ListContainer = styled.div`
-  width: 800px;
+  width: 700px;
   display: flex;
+  gap: 10px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -15,18 +16,21 @@ const ListItem = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-size: 10px;
 `;
 const ListItemBox = styled.div`
-  width: 60px;
-  height: 40px;
+  width: 0;
+  height: 0;
+  border-bottom: 40px solid ${(props) => props.backgroundColor};
+  border-right: 30px solid transparent;
+  border-left: 40px solid ${(props) => props.backgroundColor};
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-end;
+  align-items: stretch;
   text-align: center;
   font-weight: 600;
   font-size: 24px;
   color: white;
-  background-color: ${(props) => props.backgroundColor};
 `;
 
 function CongestionList({ congestionList }) {
