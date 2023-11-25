@@ -67,37 +67,46 @@ const Main = () => {
   };
 
   return (
-    <MainContainer>
-      <SideBar onLineSelect={handleLineSelect} />
+    <MainContainer2>
+      <SideBar onLineSelect={handleLineSelect} selectedLine={selectedLine} />
 
-      <h1>🚇 출근길에서 살아남기 🚇</h1>
-      {selectedLine && (
-        <img
-          src={lineImages[selectedLine]}
-          alt={selectedLine}
-          width="400px"
-          height="400px"
-        />
-      )}
-      <InputContainer>
-        <InputItem>
-          지하철 탑승시간
-          <InputTime />
-        </InputItem>
-        <InputItem>
-          탑승역
-          <InputStation text="탑승역" title="start" />
-        </InputItem>
-        <InputItem>
-          도착역
-          <InputStation text="도착역" title="end" />
-        </InputItem>
-      </InputContainer>
+      <MainContainer>
+        <h1>🚇 출근길에서 살아남기 🚇</h1>
+        {selectedLine && (
+          <img
+            src={lineImages[selectedLine]}
+            alt={selectedLine}
+            width="400px"
+            height="400px"
+          />
+        )}
+        <InputContainer>
+          <InputItem>
+            지하철 탑승시간
+            <InputTime />
+          </InputItem>
+          <InputItem>
+            탑승역
+            <InputStation text="탑승역" title="start" />
+          </InputItem>
+          <InputItem>
+            도착역
+            <InputStation text="도착역" title="end" />
+          </InputItem>
+        </InputContainer>
 
-      <CustomBtn onClick={handleSubmit} text="탐색하러 가기" />
-    </MainContainer>
+        <CustomBtn onClick={handleSubmit} text="탐색하러 가기" />
+      </MainContainer>
+    </MainContainer2>
   );
 };
+const MainContainer2 = styled.div`
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+`;
 
 const MainContainer = styled.div`
   display: flex;

@@ -77,5 +77,9 @@ const LoadingText = styled.span`
   bottom: 100px;
   left: 50%;
   transform: translate(-50%, -50%);
+  //모바일 환경에서 숨기기
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 export default Loader;
