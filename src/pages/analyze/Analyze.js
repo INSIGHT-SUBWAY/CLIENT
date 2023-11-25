@@ -7,9 +7,11 @@ import Loader from "../loader/Loader";
 
 //components
 import IconFace from "../../components/IconFace";
-import CongestionList from "../../components/ConjestionList";
-
+import CongestionList from "../../components/CongestionList";
+import CustomBtn from "../../components/button/button";
+import { useNavigate } from "react-router-dom";
 const Analyze = () => {
+  const navigate = useNavigate();
   const dummy = {
     SUBWAYEND: "성수",
     DISCOMFORT_LEVEL: 55.2,
@@ -62,32 +64,33 @@ const Analyze = () => {
         <div>예상 도착 시간: {subwayData.ARRIVETIME}</div>
       </AnalyzeHeader>
       <AnalyzeItem>
+        <Subtitle>🚆 실시간 열차 혼잡도</Subtitle>
         <CongestionList congestionList={subwayData.CONGESTION_LIST} />
         {/* <IconFace discomfortScore={subwayData.DISCOMFORT_LEVEL} /> */}
       </AnalyzeItem>
       <AnalyzeItem>
-        <Subtitle>📍 추천 탑승칸</Subtitle>
+        <Subtitle>🧚 추천 탑승칸</Subtitle>
         <InfoLists>
           <div>
             <CircleInfo>{subwayData.CURRENT_MIN_CONGESTION_CAR}</CircleInfo>
-            <div>탑승최소혼잡도</div>
+            <div>탑승 최소 혼잡도</div>
           </div>
           <div>
             <CircleInfo>{subwayData.ROUTE_MIN_CONGESTION_CAR}</CircleInfo>
-            <div>경로최소혼잡도</div>
+            <div>경로 최소 혼잡도</div>
           </div>
           <div>
             <CircleInfo>{subwayData.ROUTE_MINMIN_CONGESTION_CAR}</CircleInfo>
-            <div>경로중최소혼잡도</div>
+            <div>경로중 최소 혼잡도</div>
           </div>
         </InfoLists>
       </AnalyzeItem>
       <AnalyzeItem>
-        <Subtitle>📍 경로간 평균 혼잡도</Subtitle>
+        <Subtitle>📍 경로 간 평균 혼잡도</Subtitle>
 
         <CongestionList congestionList={subwayData.CONGESTION_LIST} />
       </AnalyzeItem>
-      <button>새로 분석하러 가기</button>
+      <CustomBtn onClick={() => navigate("/")} text="새로 검색하기" />
     </AnalyzeContainer>
   );
 };
@@ -155,10 +158,10 @@ const Subtitle = styled.span`
   border: none;
   display: flex;
   padding: 0.75rem 1.5rem;
-  width: 7rem;
+  width: 10rem;
   background-color: var(--color-gray);
   color: #ffffff;
-  font-size: 0.75rem;
+  font-size: 1rem;
   line-height: 2rem;
   font-weight: 700;
   text-align: center;
@@ -167,7 +170,7 @@ const Subtitle = styled.span`
   align-items: center;
   border-radius: 0.5rem;
   user-select: none;
-  gap: 0.75rem;
+  /* gap: 0.75rem; */
   margin-right: 2rem;
   box-shadow: 0 4px 6px -1px var(--color-gray), 0 2px 4px -1px var(--color-gray);
 `;
