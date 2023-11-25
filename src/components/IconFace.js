@@ -5,6 +5,7 @@ import {
   faFaceMeh,
   faFaceFrown,
 } from "@fortawesome/free-solid-svg-icons";
+import "../style/color.css";
 
 function IconFace({ discomfortScore }) {
   let icon = null;
@@ -13,13 +14,13 @@ function IconFace({ discomfortScore }) {
   //일단 임의로 설정
   if (discomfortScore >= 70) {
     icon = faFaceSmile;
-    iconColor = "#0A6EBD";
+    iconColor = " var(--color-blue)";
   } else if (discomfortScore >= 40) {
     icon = faFaceMeh;
-    iconColor = "#F2BE22";
+    iconColor = "var(--color-yellow)";
   } else {
     icon = faFaceFrown;
-    iconColor = "#F24C3D";
+    iconColor = "var(--color-red)";
   }
 
   const iconStyle = {
