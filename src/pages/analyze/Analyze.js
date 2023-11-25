@@ -8,6 +8,7 @@ import {
   faFaceMeh,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import IconFace from "../../components/IconFace";
 
 const Analyze = () => {
   const dummy = {
@@ -45,8 +46,7 @@ const Analyze = () => {
       <AnalyzeHeader>
         <p>지금 들어오는 {subwayData.SUBWAYEND} 행 열차</p>
         <FinalScore>출근길 불쾌지수: {subwayData.DISCOMFORT_LEVEL}</FinalScore>
-        <FontAwesomeIcon icon={faFaceSmile} size="3x" />
-
+        <IconFace discomfortScore={subwayData.DISCOMFORT_LEVEL} />
         <p>예상 도착 시간: {subwayData.ARRIVETIME}</p>
       </AnalyzeHeader>
       <div>
