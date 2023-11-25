@@ -12,7 +12,7 @@ import CongestionList from "../../components/ConjestionList";
 const Analyze = () => {
   const dummy = {
     SUBWAYEND: "성수",
-    DISCOMFORT_LEVEL: 35.2,
+    DISCOMFORT_LEVEL: 55.2,
     ARRIVETIME: "18:40:30",
     CONGESTION_LIST: [
       "44",
@@ -58,29 +58,32 @@ const Analyze = () => {
         </FinalScore>
         <div>예상 도착 시간: {subwayData.ARRIVETIME}</div>
       </AnalyzeHeader>
-      <TrainContainer>
+      <AnalyzeItem>
         <CongestionList congestionList={subwayData.CONGESTION_LIST} />
         {/* <IconFace discomfortScore={subwayData.DISCOMFORT_LEVEL} /> */}
-      </TrainContainer>
-      <InfoLists>
-        <div>추천 탑승칸</div>
+      </AnalyzeItem>
+      <AnalyzeItem>
+        <Subtitle>추천 탑승칸</Subtitle>
+        {/* <InfoLists> */}
         <div>
+          <CircleInfo>{subwayData.CURRENT_MIN_CONGESTION_CAR}</CircleInfo>
           <div>탑승최소혼잡도</div>
-          <div>{subwayData.CURRENT_MIN_CONGESTION_CAR}</div>
         </div>
         <div>
+          <CircleInfo>{subwayData.ROUTE_MIN_CONGESTION_CAR}</CircleInfo>
           <div>경로최소혼잡도</div>
-          <div>{subwayData.ROUTE_MIN_CONGESTION_CAR}</div>
         </div>
         <div>
+          <CircleInfo>{subwayData.ROUTE_MINMIN_CONGESTION_CAR}</CircleInfo>
           <div>경로중최소혼잡도</div>
-          <div>{subwayData.ROUTE_MINMIN_CONGESTION_CAR}</div>
         </div>
-      </InfoLists>
-      <div>
-        <div>경로간 평균 혼잡도</div>
+        {/* </InfoLists> */}
+      </AnalyzeItem>
+      <AnalyzeItem>
+        <Subtitle>경로간 평균 혼잡도</Subtitle>
+        {/* <div>경로간 평균 혼잡도</div> */}
         <CongestionList congestionList={subwayData.CONGESTION_LIST} />
-      </div>
+      </AnalyzeItem>
     </AnalyzeContainer>
   );
 };
@@ -90,8 +93,9 @@ const AnalyzeContainer = styled.div`
   height: 90vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  margin: 20px;
 `;
 const AnalyzeHeader = styled.div`
   width: 900px;
@@ -127,17 +131,50 @@ const DiscomfortLevelText = styled.span`
       ? "var(--color-yellow)"
       : "var(--color-blue)"};
 `;
-const TrainContainer = styled.div`
+const AnalyzeItem = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  width: 1000px;
+  justify-content: space-around;
   align-items: center;
-  height: 70px;
+  /* height: 70px; */
 `;
 
 const InfoLists = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+const Subtitle = styled.span`
+  border: none;
+  display: flex;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-gray);
+  color: #ffffff;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  vertical-align: middle;
+  align-items: center;
+  border-radius: 0.5rem;
+  user-select: none;
+  gap: 0.75rem;
+  box-shadow: 0 4px 6px -1px var(--color-gray), 0 2px 4px -1px var(--color-gray);
+`;
+const CircleInfo = styled.div`
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: var(--color-green);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 6px -1px var(--color-green),
+    0 2px 4px -1px var(--color-green);
 `;
 export default Analyze;
