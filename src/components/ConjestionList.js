@@ -11,12 +11,20 @@ const ListContainer = styled.div`
 `;
 
 const ListItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+const ListItemBox = styled.div`
   width: 60px;
   height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  font-weight: 600;
+  font-size: 24px;
   color: white;
   background-color: ${(props) => props.backgroundColor};
 `;
@@ -36,8 +44,11 @@ function CongestionList({ congestionList }) {
         }
 
         return (
-          <ListItem key={index} backgroundColor={backgroundColor}>
-            {level}
+          <ListItem>
+            <ListItemBox key={index} backgroundColor={backgroundColor}>
+              {level}
+            </ListItemBox>
+            {index + 1}칸
           </ListItem>
         );
       })}
