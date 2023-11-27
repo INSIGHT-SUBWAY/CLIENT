@@ -29,7 +29,7 @@ const ListItemBox = styled.div`
 
   border-bottom: 35px solid ${(props) => props.backgroundColor};
   border-right: 20px solid transparent;
-  border-left: 40px solid ${(props) => props.backgroundColor};
+  border-left: 50px solid ${(props) => props.backgroundColor};
   display: flex;
   justify-content: flex-end;
   text-align: center;

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 //이미지
 import Line1Image from "../../assets/images/line1.png";
 import Line2Image from "../../assets/images/line2.png";
@@ -38,32 +39,36 @@ const Main = () => {
   };
 
   // API 함수
-  const sendToApi = async (data) => {
-    // api 호출 하고
-    // axios.post('/api/path', data)
-    // 예를 들어 2초후에 응답이 왔다고 가정해보고
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({ data: "API response data" });
-      }, 2000);
-    });
-  };
+  // const sendToApi = async (data) => {
+  //   // api 호출 하고
+  //   // axios.post(BASE_URL, data);
+  //   // ${BASE_URL}/subway/analyze?start_station={start}&end_station={end}
+  //   // 예를 들어 2초후에 응답이 왔다고 가정해보고
+  //   return new Promise((resolve) => {
+  //     setTimeout(() => {
+  //       resolve({ data: "API response data" });
+  //     }, 2000);
+  //   });
+  // };
   // API 호출 및 페이지 이동 처리
   const handleSubmit = async () => {
     // local 에 저장한 start, end, time 보내고
-    const response = await sendToApi({
-      start: localStorage.getItem("start"),
-      end: localStorage.getItem("end"),
-      time: localStorage.getItem("time"),
-    });
+    // const response = await sendToApi({
+    //   start: localStorage.getItem("start"),
+    //   end: localStorage.getItem("end"),
+    //   time: localStorage.getItem("time"),
+    // });
 
     // 데이터 기다리는 동안 로더 페이지로 이동
     navigate("/loader");
+    setTimeout(() => {
+      navigate("/analyze");
+    }, 2000);
 
     // 응답 대기 및 Analyze 페이지로 이동
-    setTimeout(() => {
-      navigate("/analyze", { state: { data: response.data } });
-    }, 3000);
+    // setTimeout(() => {
+    //   navigate("/analyze", { state: { data: response.data } });
+    // }, 3000);
   };
 
   return (

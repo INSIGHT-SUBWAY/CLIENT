@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-
+import axios from "axios";
 //pages
 import Loader from "../loader/Loader";
 
@@ -12,41 +12,80 @@ import CustomBtn from "../../components/button/button";
 import { useNavigate } from "react-router-dom";
 const Analyze = () => {
   const navigate = useNavigate();
-  const dummy = {
-    SUBWAYEND: "성수",
-    DISCOMFORT_LEVEL: 55.2,
-    ARRIVETIME: "18:40:30",
-    CONGESTION_LIST: [
-      "44",
-      "52",
-      "38",
-      "28",
-      "31",
-      "34",
-      "71",
-      "31",
-      "33",
-      "30",
-    ],
-    CURRENT_MIN_CONGESTION_CAR: 9, // 탑승 최소 혼잡도 칸
-    ROUTE_MIN_CONGESTION_CAR: 2, //경로중 최소평균혼잡도
-    ROUTE_MINMIN_CONGESTION_CAR: 3, //경로중 최소혼잡도보유칸
-  };
+  const BASE_URL = "https://api.sursubway.store";
 
-  const [subwayData, setSubwayData] = useState(dummy);
+  const start = localStorage.getItem("start").replace("역", "");
+  const end = localStorage.getItem("end").replace("역", "");
 
-  // useEffect(() => {
-  //   fetch("API_ENDPOINT")
-  //     .then((response) => response.json())
-  //     .then((data) => setSubwayData(data))
-  //     .catch((error) => console.error("Error:", error));
-  // }, []);
+  const [subwayData, setSubwayData] = useState(null);
+
+  // const dummy = {
+  //   SUBWAYEND: "성수",
+  //   DISCOMFORT_LEVEL: 55.2,
+  //   ARRIVETIME: "18:40:30",
+  //   CONGESTION_LIST: [
+  //     "44",
+  //     "52",
+  //     "38",
+  //     "28",
+  //     "31",
+  //     "34",
+  //     "71",
+  //     "31",
+  //     "33",
+  //     "30",
+  //   ],
+  //   CURRENT_MIN_CONGESTION_CAR: 9, // 탑승 최소 혼잡도 칸
+  //   ROUTE_MIN_CONGESTION_CAR: 2, //경로중 최소평균혼잡도
+  //   ROUTE_MINMIN_CONGESTION_CAR: 3, //경로중 최소혼잡도보유칸
+  // };
+
+  useEffect(() => {
+    // fetch(
+    //   `${BASE_URL}/subway/analyze?start_station=${start}&end_station=${end}`,
+    //   {
+    //     method: "GET",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   }
+    // )
+    //   .then((response) => response.json())
+    //   .then((result) => {
+    //     console.log("result:", result);
+    //   });
+
+    const fetchSubwayData = async (start, end) => {
+      const url = `${BASE_URL}/subway/analyze/`;
+      try {
+        const response = await axios.get(url, {
+          params: {
+            start_station: start,
+            end_station: end,
+          },
+          headers: {
+            accept: "application/json",
+          },
+        });
+        console.log(response);
+        setSubwayData(response.data);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+    console.log(start);
+    console.log(end);
+    fetchSubwayData(start, end);
+  }, [start]);
 
   if (!subwayData) return <Loader />;
 
   return (
     <AnalyzeContainer>
       <ProjectText>🚇 출근길에서 살아남기 🚇</ProjectText>
+      <ProjectText>
+        {start}역 ➡️ {end}역
+      </ProjectText>
       <AnalyzeHeader>
         <ProjectText2>
           지금 들어오는
@@ -70,7 +109,7 @@ const Analyze = () => {
       </AnalyzeHeader>
       <AnalyzeContext>
         <AnalyzeItem>
-          <Subtitle>⏰ 실시간 열차 혼잡도</Subtitle>
+          <Subtitle>⏰ 실시간 {start}역 열차 혼잡도 </Subtitle>
           <CongestionList congestionList={subwayData.CONGESTION_LIST} />
           {/* <IconFace discomfortScore={subwayData.DISCOMFORT_LEVEL} /> */}
         </AnalyzeItem>
