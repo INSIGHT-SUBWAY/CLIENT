@@ -278,9 +278,9 @@ const FinalScore = styled.div`
 
 const DiscomfortLevelText = styled.span`
   color: ${(props) =>
-    props.discomfortScore >= 70
+    props.discomfortScore >= 110
       ? "var(--color-red)"
-      : props.discomfortScore >= 40
+      : props.discomfortScore >= 70
       ? "var(--color-yellow)"
       : "var(--color-blue)"};
 `;
