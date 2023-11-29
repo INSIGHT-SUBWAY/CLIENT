@@ -57,9 +57,9 @@ function CongestionList({ congestionList }) {
       {congestionList.map((level, index) => {
         let backgroundColor = "";
 
-        if (level >= 70) {
+        if (level >= 110) {
           backgroundColor = "var(--color-red)";
-        } else if (level >= 40) {
+        } else if (level >= 70) {
           backgroundColor = "var(--color-yellow)";
         } else {
           backgroundColor = "var(--color-blue)";

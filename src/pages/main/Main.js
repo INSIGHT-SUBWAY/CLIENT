@@ -105,7 +105,9 @@ const Main = () => {
 
         <CustomBtn onClick={handleSubmit} text="탐색하러 가기" />
       </MainContainer>
-      <FavButton onClick={handleFavButtonClick}>⭐️ 즐겨 찾는 노선</FavButton>
+      <FavButton onClick={handleFavButtonClick}>
+        ⭐️ 즐겨 찾는 노선 CLICK
+      </FavButton>
     </MainContainer2>
   );
 };
@@ -168,7 +170,7 @@ const FavButton = styled.button`
   &:active {
     transform: translateY(-1px);
   }
-  //모바일 환경에서는 sidebar 숨기기
+  //모바일 환경에서는 즐찾 버튼 숨기기
   @media (max-width: 768px) {
     display: none;
   }

@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
+
 const InputStation = ({ title, text }) => {
   //local에 저장할때 title: 지하철명
   //local에 start:__역, end:___역으로 저장됨
@@ -14,8 +15,15 @@ const InputStation = ({ title, text }) => {
   //   localStorage.setItem(title, station);
   // }, [station, title]);
 
+  // const { station, updateStation } = useStation();
+
+  // const handleChange = (event) => {
+  //   updateStation(event.target.value);
+  // };
+
   const handleChange = (event) => {
     setStation(event.target.value);
+    localStorage.setItem(title, event.target.value);
   };
 
   useEffect(() => {
@@ -28,11 +36,11 @@ const InputStation = ({ title, text }) => {
     };
 
     window.addEventListener("storage", handleStorageChange);
-
     return () => {
       window.removeEventListener("storage", handleStorageChange);
     };
   }, [title]);
+
   //2호선 전체
   const line2Stations = [
     "강남역",
@@ -89,11 +97,10 @@ const InputStation = ({ title, text }) => {
 
   return (
     <div>
-      {/* <label>{text}</label> */}
       <SelectContainer value={station} onChange={handleChange}>
-        {line2Stations.map((station) => (
-          <option key={station} value={station}>
-            {station}
+        {line2Stations.map((stationName) => (
+          <option key={stationName} value={stationName}>
+            {stationName}
           </option>
         ))}
       </SelectContainer>

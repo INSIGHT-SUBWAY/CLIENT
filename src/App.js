@@ -6,6 +6,7 @@ import { Route } from "react-router-dom";
 import Main from "./pages/main/Main";
 import Analyze from "./pages/analyze/Analyze";
 import Loader from "./pages/loader/Loader";
+
 function App() {
   return (
     <BrowserRouter>

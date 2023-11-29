@@ -13,10 +13,10 @@ function IconFace({ discomfortScore }) {
   let icon = null;
   let iconColor = "";
 
-  if (discomfortScore >= 70) {
+  if (discomfortScore >= 110) {
     icon = faFaceFrown;
     iconColor = "var(--color-red)";
-  } else if (discomfortScore >= 40) {
+  } else if (discomfortScore >= 70) {
     icon = faFaceMeh;
     iconColor = "var(--color-yellow)";
   } else {

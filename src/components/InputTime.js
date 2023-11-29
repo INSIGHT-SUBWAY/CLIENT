@@ -6,8 +6,8 @@ const InputTime = () => {
   useEffect(() => {
     const now = new Date();
     now.setHours(now.getHours() + 9); //우리나라 기준 시간
-    // const koreaTime = now.toISOString().substring(11, 16);
-    const koreaTime = "09:42";
+    const koreaTime = now.toISOString().substring(11, 16);
+    // const koreaTime = "09:42";
     setTime(koreaTime);
     localStorage.setItem("time", koreaTime);
   }, []);
