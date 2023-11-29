@@ -19,68 +19,128 @@ const Analyze = () => {
 
   const [subwayData, setSubwayData] = useState(null);
 
-  // const dummy = {
-  //   SUBWAYEND: "성수",
-  //   DISCOMFORT_LEVEL: 55.2,
-  //   ARRIVETIME: "18:40:30",
-  //   CONGESTION_LIST: [
-  //     "44",
-  //     "52",
-  //     "38",
-  //     "28",
-  //     "31",
-  //     "34",
-  //     "71",
-  //     "31",
-  //     "33",
-  //     "30",
-  //   ],
-  //   CURRENT_MIN_CONGESTION_CAR: 9, // 탑승 최소 혼잡도 칸
-  //   ROUTE_MIN_CONGESTION_CAR: 2, //경로중 최소평균혼잡도
-  //   ROUTE_MINMIN_CONGESTION_CAR: 3, //경로중 최소혼잡도보유칸
-  // };
+  const [isLoading, setIsLoading] = useState(true); // 로딩 상태 관리
+  const [error, setError] = useState(null); // 에러 상태 관리
 
+  const renderPrediction = () => {
+    return subwayData.PREDICTION.PRED_CONGESTION.map((station, index) => {
+      const stationName = Object.keys(station)[0];
+      const roundedCongestionList = station[stationName].map((value) =>
+        Math.round(value)
+      );
+
+      return (
+        <PredictionLists key={index}>
+          <Subtitle>{stationName}</Subtitle>
+          <CongestionList congestionList={roundedCongestionList} />
+        </PredictionLists>
+      );
+    });
+  };
+
+  const dummy = {
+    SUBWAYEND: "성수",
+    DISCOMFORT_LEVEL: 49.3,
+    ARRIVETIME: "12:07:30",
+    CONGESTION_LIST: [
+      "50",
+      "76",
+      "73",
+      "65",
+      "30",
+      "42",
+      "30",
+      "54",
+      "30",
+      "43",
+    ],
+    CURRENT_MIN_CONGESTION_CAR: 9,
+    PREDICTION: {
+      PRED_CONGESTION: [
+        {
+          홍대입구: [
+            43.01778793334961, 46.161434173583984, 63.19164276123047,
+            64.3061294555664, 80.9529037475586, 65.91194152832031,
+            64.77896118164062, 59.00312042236328, 54.280479431152344,
+            50.22624969482422,
+          ],
+        },
+        {
+          합정: [
+            10.875320434570312, 14.028264045715332, 10.036967277526855,
+            5.990289211273193, 8.8689603805542, 7.987982749938965,
+            9.896718978881836, 8.075178146362305, 8.897831916809082,
+            4.963064193725586,
+          ],
+        },
+        {
+          당산: [
+            34.07307815551758, 33.937744140625, 32.952293395996094,
+            36.92657470703125, 38.0701904296875, 43.908817291259766,
+            33.98743438720703, 38.91814041137695, 29.91132164001465,
+            25.074451446533203,
+          ],
+        },
+        {
+          영등포구청: [
+            34.13094711303711, 54.26263427734375, 57.27089309692383,
+            61.848045349121094, 50.0760612487793, 49.04446029663086,
+            59.39686965942383, 41.143890380859375, 44.091529846191406,
+            50.11717224121094,
+          ],
+        },
+        {
+          문래: [
+            6.898412704467773, 8.154352188110352, 9.04826831817627,
+            7.109294414520264, 5.912712097167969, 5.102449893951416,
+            6.016797065734863, 4.929612636566162, 4.093511581420898,
+            3.032728433609009,
+          ],
+        },
+      ],
+      MIN_MEAN_INDEX: 1,
+      MIN_VALUE_INDEX: 10,
+    },
+  };
   useEffect(() => {
-    // fetch(
-    //   `${BASE_URL}/subway/analyze?start_station=${start}&end_station=${end}`,
-    //   {
-    //     method: "GET",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   }
-    // )
-    //   .then((response) => response.json())
-    //   .then((result) => {
-    //     console.log("result:", result);
-    //   });
+    setSubwayData(dummy);
+  }, []);
 
-    const fetchSubwayData = async (start, end) => {
-      const url = `${BASE_URL}/subway/analyze/`;
-      try {
-        const response = await axios.get(url, {
-          params: {
-            start_station: start,
-            end_station: end,
-          },
-          headers: {
-            accept: "application/json",
-          },
-        });
-        console.log(response);
-        setSubwayData(response.data);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-    console.log(start);
-    console.log(end);
-    fetchSubwayData(start, end);
-  }, [start]);
+  // useEffect(() => {
+  //   const fetchSubwayData = async (start, end) => {
+  //     const url = `${BASE_URL}/subway/analyze/`;
+  //     try {
+  //       const response = await axios.get(url, {
+  //         params: {
+  //           start_station: start,
+  //           end_station: end,
+  //         },
+  //         headers: {
+  //           accept: "application/json",
+  //         },
+  //       });
+  //       console.log(response);
+  //       console.log("data", response.data);
+  //       // Process the PRED_CONGESTION data
+  //       // const congestionData = extractCongestionData(response.data);
+
+  //       setSubwayData(response.data);
+
+  //       // console.log("subway data", subwayData);
+  //     } catch (error) {
+  //       setSubwayData(null);
+  //       console.error("Error:", error);
+  //     }
+  //   };
+  //   console.log(start);
+  //   console.log(end);
+  //   fetchSubwayData(start, end);
+  //   console.log("subway data", subwayData);
+  // }, [start, end]);
 
   if (!subwayData) return <Loader />;
 
-  return (
+  return subwayData ? (
     <AnalyzeContainer>
       <ProjectText>🚇 출근길에서 살아남기 🚇</ProjectText>
       <ProjectText>
@@ -121,11 +181,11 @@ const Analyze = () => {
               <div>탑승 최소 혼잡도</div>
             </div>
             <div>
-              <CircleInfo>{subwayData.ROUTE_MIN_CONGESTION_CAR}</CircleInfo>
+              <CircleInfo>{subwayData.PREDICTION.MIN_MEAN_INDEX}</CircleInfo>
               <div>경로 최소 혼잡도</div>
             </div>
             <div>
-              <CircleInfo>{subwayData.ROUTE_MINMIN_CONGESTION_CAR}</CircleInfo>
+              <CircleInfo>{subwayData.PREDICTION.MIN_VALUE_INDEX}</CircleInfo>
               <div>경로중 최소 혼잡도</div>
             </div>
           </InfoLists>
@@ -133,11 +193,16 @@ const Analyze = () => {
         <AnalyzeItem>
           <Subtitle>📍 경로 간 평균 혼잡도</Subtitle>
 
-          <CongestionList congestionList={subwayData.CONGESTION_LIST} />
+          <CongestionList congestionList={subwayData?.CONGESTION_LIST} />
         </AnalyzeItem>
+
+        <button>✚ 각 칸 혼잡도 예측 결과</button>
+        {renderPrediction()}
       </AnalyzeContext>
       <CustomBtn onClick={() => navigate("/")} text="새로 검색하기" />
     </AnalyzeContainer>
+  ) : (
+    <Loader />
   );
 };
 
@@ -270,5 +335,11 @@ const CircleInfo = styled.div`
   &:hover {
     transform: scale(1.2);
   }
+`;
+
+const PredictionLists = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 800px;
 `;
 export default Analyze;

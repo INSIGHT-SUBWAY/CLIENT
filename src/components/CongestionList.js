@@ -1,6 +1,7 @@
 import React from "react";
 import "../style/color.css";
 import styled from "styled-components";
+import Loader from "../pages/loader/Loader";
 
 const ListContainer = styled.div`
   width: 700px;
@@ -40,6 +41,9 @@ const ListItemBox = styled.div`
 `;
 
 function CongestionList({ congestionList }) {
+  if (!congestionList || congestionList.length === 0) {
+    return <div> 데이터 없음</div>;
+  }
   return (
     <ListContainer>
       {congestionList.map((level, index) => {
