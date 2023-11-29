@@ -22,6 +22,13 @@ const Analyze = () => {
   const [isLoading, setIsLoading] = useState(true); // 로딩 상태 관리
   const [error, setError] = useState(null); // 에러 상태 관리
 
+  // 각 칸 예측 정보 보여주는 버튼 생성
+  const [showPrediction, setShowPrediction] = useState(false);
+
+  const handleButtonClick = () => {
+    setShowPrediction(!showPrediction); // 현재 상태의 반대로 설정
+  };
+
   const renderPrediction = () => {
     return subwayData.PREDICTION.PRED_CONGESTION.map((station, index) => {
       const stationName = Object.keys(station)[0];
@@ -31,13 +38,14 @@ const Analyze = () => {
 
       return (
         <PredictionLists key={index}>
-          <Subtitle>{stationName}</Subtitle>
+          <div>{stationName}</div>
           <CongestionList congestionList={roundedCongestionList} />
         </PredictionLists>
       );
     });
   };
 
+  //더미 데이터로 추가 데이터 정보 구현
   const dummy = {
     SUBWAYEND: "성수",
     DISCOMFORT_LEVEL: 49.3,
@@ -195,10 +203,16 @@ const Analyze = () => {
 
           <CongestionList congestionList={subwayData?.CONGESTION_LIST} />
         </AnalyzeItem>
-
-        <button>✚ 각 칸 혼잡도 예측 결과</button>
-        {renderPrediction()}
       </AnalyzeContext>
+
+      {/* <div> */}
+      <StyledButton onClick={handleButtonClick}>
+        {showPrediction
+          ? "⬆️ 각 칸별 혼잡도 예측 결과 닫기"
+          : "⬇️ 각 칸별 혼잡도 예측 결과 보기"}
+      </StyledButton>
+      {showPrediction && renderPrediction()}
+      {/* </div> */}
       <CustomBtn onClick={() => navigate("/")} text="새로 검색하기" />
     </AnalyzeContainer>
   ) : (
@@ -337,9 +351,35 @@ const CircleInfo = styled.div`
   }
 `;
 
+const StyledButton = styled.button`
+  margin: 20px 0px;
+  padding: 1.3em 3em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+
+  &:hover {
+    background-color: #23c483;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+`;
 const PredictionLists = styled.div`
   display: flex;
   flex-direction: row;
-  width: 800px;
 `;
 export default Analyze;
