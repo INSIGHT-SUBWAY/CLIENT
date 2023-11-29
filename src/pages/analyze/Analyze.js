@@ -10,18 +10,13 @@ import IconFace from "../../components/IconFace";
 import CongestionList from "../../components/CongestionList";
 import CustomBtn from "../../components/button/button";
 import { useNavigate } from "react-router-dom";
+
 const Analyze = () => {
   const navigate = useNavigate();
   const BASE_URL = "https://api.sursubway.store";
-
   const start = localStorage.getItem("start").replace("역", "");
   const end = localStorage.getItem("end").replace("역", "");
-
   const [subwayData, setSubwayData] = useState(null);
-
-  const [isLoading, setIsLoading] = useState(true); // 로딩 상태 관리
-  const [error, setError] = useState(null); // 에러 상태 관리
-
   // 각 칸 예측 정보 보여주는 버튼 생성
   const [showPrediction, setShowPrediction] = useState(false);
 
@@ -32,13 +27,14 @@ const Analyze = () => {
   const renderPrediction = () => {
     return subwayData.PREDICTION.PRED_CONGESTION.map((station, index) => {
       const stationName = Object.keys(station)[0];
+      // 예측 결과로 나온 각 칸별 혼잡도 값 정수 형태로 보여주기 위해 반올림
       const roundedCongestionList = station[stationName].map((value) =>
         Math.round(value)
       );
 
       return (
         <PredictionLists key={index}>
-          <div>{stationName}</div>
+          <Subtitle2>{stationName}</Subtitle2>
           <CongestionList congestionList={roundedCongestionList} />
         </PredictionLists>
       );
@@ -205,14 +201,13 @@ const Analyze = () => {
         </AnalyzeItem>
       </AnalyzeContext>
 
-      {/* <div> */}
       <StyledButton onClick={handleButtonClick}>
         {showPrediction
-          ? "⬆️ 각 칸별 혼잡도 예측 결과 닫기"
-          : "⬇️ 각 칸별 혼잡도 예측 결과 보기"}
+          ? "⬆️ 경로 내 모든 역 혼잡도 예측 결과 닫기"
+          : "⬇️ 경로 내 모든 역 혼잡도 예측 결과 보기"}
       </StyledButton>
       {showPrediction && renderPrediction()}
-      {/* </div> */}
+
       <CustomBtn onClick={() => navigate("/")} text="새로 검색하기" />
     </AnalyzeContainer>
   ) : (
@@ -330,6 +325,23 @@ const Subtitle = styled.div`
   margin-right: 2rem;
   box-shadow: 0 4px 6px -1px var(--color-gray), 0 2px 4px -1px var(--color-gray);
 `;
+const Subtitle2 = styled.div`
+  border: none;
+  display: flex;
+  padding: 0.75rem 1.5rem;
+  width: 150px;
+  color: black;
+  font-size: 1rem;
+  line-height: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  vertical-align: middle;
+  align-items: center;
+  border-radius: 0.5rem;
+  margin-right: 2rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+`;
 const CircleInfo = styled.div`
   width: 100px;
   height: 100px;
@@ -355,6 +367,7 @@ const StyledButton = styled.button`
   margin: 20px 0px;
   padding: 1.3em 3em;
   font-size: 12px;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2.5px;
   font-weight: 500;
@@ -381,5 +394,8 @@ const StyledButton = styled.button`
 const PredictionLists = styled.div`
   display: flex;
   flex-direction: row;
+  width: 850px;
+  justify-content: space-between;
+  align-items: center;
 `;
 export default Analyze;
