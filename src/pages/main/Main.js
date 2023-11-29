@@ -37,6 +37,10 @@ const Main = () => {
   const handleLineSelect = (line) => {
     setSelectedLine(line);
   };
+  const handleFavButtonClick = () => {
+    localStorage.setItem("start", "신촌역");
+    localStorage.setItem("end", "신도림역");
+  };
 
   // API 함수
   // const sendToApi = async (data) => {
@@ -74,7 +78,6 @@ const Main = () => {
   return (
     <MainContainer2>
       <SideBar onLineSelect={handleLineSelect} selectedLine={selectedLine} />
-
       <MainContainer>
         <h1>🚇 출근길에서 살아남기 🚇</h1>
         {selectedLine && (
@@ -102,6 +105,7 @@ const Main = () => {
 
         <CustomBtn onClick={handleSubmit} text="탐색하러 가기" />
       </MainContainer>
+      <FavButton onClick={handleFavButtonClick}>⭐️ 즐겨 찾는 노선</FavButton>
     </MainContainer2>
   );
 };
@@ -132,5 +136,56 @@ const InputItem = styled.div`
   margin-bottom: 15px;
   width: 350px;
 `;
+const Fav = styled.div`
+  width: 200px;
+  border: 1px solid #c4c4c4;
+  box-sizing: border-box;
+  border-radius: 10px;
+  padding: 12px 13px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  &:focus {
+    border: 1px solid #21d13f;
+    box-sizing: border-box;
+    border-radius: 10px;
+    outline: 1px solid #42f560;
+    border-radius: 10px;
+  }
+`;
 
+const FavButton = styled.button`
+  position: absolute;
+  right: 300px;
+  top: 200px;
+  margin: 20px 0px;
+  padding: 1.3em 3em;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+
+  &:hover {
+    font-weight: 900;
+    background-color: #23c483;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+`;
 export default Main;

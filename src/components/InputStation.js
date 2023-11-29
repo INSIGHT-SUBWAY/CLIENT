@@ -6,6 +6,14 @@ const InputStation = ({ title, text }) => {
   //local에 start:__역, end:___역으로 저장됨
   const [station, setStation] = useState(localStorage.getItem(title) || "");
 
+  // const handleChange = (event) => {
+  //   setStation(event.target.value);
+  // };
+
+  // useEffect(() => {
+  //   localStorage.setItem(title, station);
+  // }, [station, title]);
+
   const handleChange = (event) => {
     setStation(event.target.value);
   };
@@ -14,6 +22,17 @@ const InputStation = ({ title, text }) => {
     localStorage.setItem(title, station);
   }, [station, title]);
 
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setStation(localStorage.getItem(title) || "");
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, [title]);
   //2호선 전체
   const line2Stations = [
     "강남역",
