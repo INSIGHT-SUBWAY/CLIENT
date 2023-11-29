@@ -10,9 +10,12 @@ const ListContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
   @media (max-width: 768px) {
     padding: 10px;
-    width: 350px;
+    width: 330px;
+    /* flex: wrap; */
+    /* width: 100vw; */
     flex-wrap: wrap;
   }
 `;
@@ -23,6 +26,10 @@ const ListItem = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 10px;
+  @media (max-width: 768px) {
+    //모바일에서는 한 줄에 5칸씩 뜨도록 조정해줌
+    width: 15%;
+  }
 `;
 const ListItemBox = styled.div`
   width: 0;

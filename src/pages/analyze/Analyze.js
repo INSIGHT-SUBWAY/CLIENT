@@ -306,7 +306,11 @@ const InfoLists = styled.div`
   align-items: center;
   padding: 20px;
   @media (max-width: 768px) {
-    flex-direction: column;
+    /* flex-direction: column; */
+    width: 100vw;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 16spx;
   }
 `;
 
@@ -363,6 +367,13 @@ const CircleInfo = styled.div`
   &:hover {
     transform: scale(1.2);
   }
+  @media (max-width: 768px) {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const StyledButton = styled.button`
@@ -396,9 +407,14 @@ const StyledButton = styled.button`
 const PredictionLists = styled.div`
   display: flex;
   flex-direction: row;
-  width: 850px;
+  /* width: 850px; */
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+  //모바일 환경에서는 sidebar 숨기기
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 export default Analyze;
