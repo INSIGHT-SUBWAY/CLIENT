@@ -136,25 +136,6 @@ const InputItem = styled.div`
   margin-bottom: 15px;
   width: 350px;
 `;
-const Fav = styled.div`
-  width: 200px;
-  border: 1px solid #c4c4c4;
-  box-sizing: border-box;
-  border-radius: 10px;
-  padding: 12px 13px;
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
-  &:focus {
-    border: 1px solid #21d13f;
-    box-sizing: border-box;
-    border-radius: 10px;
-    outline: 1px solid #42f560;
-    border-radius: 10px;
-  }
-`;
 
 const FavButton = styled.button`
   position: absolute;
@@ -186,6 +167,10 @@ const FavButton = styled.button`
 
   &:active {
     transform: translateY(-1px);
+  }
+  //모바일 환경에서는 sidebar 숨기기
+  @media (max-width: 768px) {
+    display: none;
   }
 `;
 export default Main;
