@@ -13,7 +13,8 @@ import { useNavigate } from "react-router-dom";
 
 const Analyze = () => {
   const navigate = useNavigate();
-  const BASE_URL = "https://api.sursubway.store";
+  // const BASE_URL = "https://api.sursubway.store";
+  const BASE_URL = "http://127.0.0.1:8000";
   const start = localStorage.getItem("start").replace("역", "");
   const end = localStorage.getItem("end").replace("역", "");
   const [subwayData, setSubwayData] = useState(null);
@@ -42,105 +43,108 @@ const Analyze = () => {
   };
 
   // 더미 데이터로 추가 데이터 정보 구현
-  const dummy = {
-    SUBWAYEND: "성수",
-    DISCOMFORT_LEVEL: 49.3,
-    ARRIVETIME: "12:07:30",
-    CONGESTION_LIST: [
-      "50",
-      "176",
-      "173",
-      "265",
-      "230",
-      "42",
-      "30",
-      "54",
-      "30",
-      "43",
-    ],
-    CURRENT_MIN_CONGESTION_CAR: 9,
-    PREDICTION: {
-      PRED_CONGESTION: [
-        {
-          홍대입구: [
-            43.01778793334961, 46.161434173583984, 63.19164276123047,
-            64.3061294555664, 80.9529037475586, 65.91194152832031,
-            64.77896118164062, 59.00312042236328, 54.280479431152344,
-            50.22624969482422,
-          ],
-        },
-        {
-          합정: [
-            10.875320434570312, 14.028264045715332, 10.036967277526855,
-            5.990289211273193, 8.8689603805542, 7.987982749938965,
-            9.896718978881836, 8.075178146362305, 8.897831916809082,
-            4.963064193725586,
-          ],
-        },
-        {
-          당산: [
-            34.07307815551758, 33.937744140625, 32.952293395996094,
-            36.92657470703125, 38.0701904296875, 43.908817291259766,
-            33.98743438720703, 38.91814041137695, 29.91132164001465,
-            25.074451446533203,
-          ],
-        },
-        {
-          영등포구청: [
-            34.13094711303711, 54.26263427734375, 57.27089309692383,
-            61.848045349121094, 50.0760612487793, 49.04446029663086,
-            59.39686965942383, 41.143890380859375, 44.091529846191406,
-            50.11717224121094,
-          ],
-        },
-        {
-          문래: [
-            6.898412704467773, 8.154352188110352, 9.04826831817627,
-            7.109294414520264, 5.912712097167969, 5.102449893951416,
-            6.016797065734863, 4.929612636566162, 4.093511581420898,
-            3.032728433609009,
-          ],
-        },
-      ],
-      MIN_MEAN_INDEX: 1,
-      MIN_VALUE_INDEX: 10,
-    },
-  };
-  useEffect(() => {
-    setSubwayData(dummy);
-  }, []);
-
+  // const dummy = {
+  //   SUBWAYEND: "성수",
+  //   DISCOMFORT_LEVEL: 49.3,
+  //   ARRIVETIME: "12:07:30",
+  //   CONGESTION_LIST: [
+  //     "50",
+  //     "176",
+  //     "173",
+  //     "265",
+  //     "230",
+  //     "42",
+  //     "30",
+  //     "54",
+  //     "30",
+  //     "43",
+  //   ],
+  //   CURRENT_MIN_CONGESTION_CAR: 9,
+  //   PREDICTION: {
+  //     PRED_CONGESTION: [
+  //       {
+  //         홍대입구: [
+  //           43.01778793334961, 46.161434173583984, 63.19164276123047,
+  //           64.3061294555664, 80.9529037475586, 65.91194152832031,
+  //           64.77896118164062, 59.00312042236328, 54.280479431152344,
+  //           50.22624969482422,
+  //         ],
+  //       },
+  //       {
+  //         합정: [
+  //           10.875320434570312, 14.028264045715332, 10.036967277526855,
+  //           5.990289211273193, 8.8689603805542, 7.987982749938965,
+  //           9.896718978881836, 8.075178146362305, 8.897831916809082,
+  //           4.963064193725586,
+  //         ],
+  //       },
+  //       {
+  //         당산: [
+  //           34.07307815551758, 33.937744140625, 32.952293395996094,
+  //           36.92657470703125, 38.0701904296875, 43.908817291259766,
+  //           33.98743438720703, 38.91814041137695, 29.91132164001465,
+  //           25.074451446533203,
+  //         ],
+  //       },
+  //       {
+  //         영등포구청: [
+  //           34.13094711303711, 54.26263427734375, 57.27089309692383,
+  //           61.848045349121094, 50.0760612487793, 49.04446029663086,
+  //           59.39686965942383, 41.143890380859375, 44.091529846191406,
+  //           50.11717224121094,
+  //         ],
+  //       },
+  //       {
+  //         문래: [
+  //           6.898412704467773, 8.154352188110352, 9.04826831817627,
+  //           7.109294414520264, 5.912712097167969, 5.102449893951416,
+  //           6.016797065734863, 4.929612636566162, 4.093511581420898,
+  //           3.032728433609009,
+  //         ],
+  //       },
+  //     ],
+  //     MIN_MEAN_INDEX: 1,
+  //     MIN_VALUE_INDEX: 10,
+  //   },
+  // };
   // useEffect(() => {
-  //   const fetchSubwayData = async (start, end) => {
-  //     const url = `${BASE_URL}/subway/analyze/`;
-  //     try {
-  //       const response = await axios.get(url, {
-  //         params: {
-  //           start_station: start,
-  //           end_station: end,
-  //         },
-  //         headers: {
-  //           accept: "application/json",
-  //         },
-  //       });
-  //       console.log(response);
-  //       console.log("data", response.data);
-  //       // Process the PRED_CONGESTION data
-  //       // const congestionData = extractCongestionData(response.data);
+  //   setSubwayData(dummy);
+  // }, []);
 
-  //       setSubwayData(response.data);
+  useEffect(() => {
+    const fetchSubwayData = async (start, end) => {
+      const url = `${BASE_URL}/subway/analyze/`;
+      // const url = `${BASE_URL}/subway`;
+      try {
+        const response = await axios.get(url, {
+          params: {
+            start_station: start,
+            end_station: end,
+          },
+          headers: {
+            accept: "application/json",
+          },
+        });
+        console.log(start);
+        console.log(end);
+        console.log(response);
+        console.log("data", response.data);
+        // Process the PRED_CONGESTION data
+        // const congestionData = extractCongestionData(response.data);
 
-  //       // console.log("subway data", subwayData);
-  //     } catch (error) {
-  //       setSubwayData(null);
-  //       console.error("Error:", error);
-  //     }
-  //   };
-  //   console.log(start);
-  //   console.log(end);
-  //   fetchSubwayData(start, end);
-  //   console.log("subway data", subwayData);
-  // }, [start, end]);
+        setSubwayData(response.data);
+
+        // console.log("subway data", subwayData);
+      } catch (error) {
+        setSubwayData(null);
+        console.error("Error:", error);
+      }
+    };
+    // console.log(start);
+    // console.log(end);
+    fetchSubwayData(start, end);
+    console.log("subway data", subwayData);
+  }, [start, end]);
 
   if (!subwayData) return <Loader />;
 
