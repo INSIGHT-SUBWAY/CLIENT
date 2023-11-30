@@ -13,8 +13,8 @@ import { useNavigate } from "react-router-dom";
 
 const Analyze = () => {
   const navigate = useNavigate();
-  // const BASE_URL = "https://api.sursubway.store";
-  const BASE_URL = "http://127.0.0.1:8000";
+  const BASE_URL = "https://api.sursubway.store";
+  // const BASE_URL = "http://127.0.0.1:8000";
   const start = localStorage.getItem("start").replace("역", "");
   const end = localStorage.getItem("end").replace("역", "");
   const [subwayData, setSubwayData] = useState(null);
@@ -43,98 +43,97 @@ const Analyze = () => {
   };
 
   // 더미 데이터로 추가 데이터 정보 구현
-  const dummy = {
-    SUBWAYEND: "성수",
-    DISCOMFORT_LEVEL: 49.3,
-    ARRIVETIME: "12:07:30",
-    CONGESTION_LIST: [
-      "50",
-      "76",
-      "73",
-      "65",
-      "30",
-      "42",
-      "30",
-      "54",
-      "30",
-      "43",
-    ],
-    CURRENT_MIN_CONGESTION_CAR: 9,
-    PREDICTION: {
-      PRED_CONGESTION: [
-        {
-          이대: [
-            43.01778793334961, 46.161434173583984, 63.19164276123047,
-            64.3061294555664, 80.9529037475586, 65.91194152832031,
-            64.77896118164062, 59.00312042236328, 54.280479431152344,
-            50.22624969482422,
-          ],
-        },
-        {
-          아현: [
-            10.875320434570312, 14.028264045715332, 10.036967277526855,
-            5.990289211273193, 8.8689603805542, 7.987982749938965,
-            9.896718978881836, 8.075178146362305, 8.897831916809082,
-            4.963064193725586,
-          ],
-        },
-        {
-          충정로: [
-            34.07307815551758, 33.937744140625, 32.952293395996094,
-            36.92657470703125, 38.0701904296875, 43.908817291259766,
-            33.98743438720703, 38.91814041137695, 29.91132164001465,
-            25.074451446533203,
-          ],
-        },
-      ],
-      MIN_MEAN_INDEX: 1,
-      MIN_VALUE_INDEX: 10,
-      MEAN_ARRAY: [
-        25.799108505249023, 31.308887481689453, 34.5000114440918,
-        35.23606872558594, 36.77616500854492, 34.39113235473633,
-        34.81535720825195, 30.413990020751953, 28.254932403564453,
-        26.6827335357666,
-      ],
-    },
-  };
-  useEffect(() => {
-    setSubwayData(dummy);
-  }, []);
-
+  // const dummy = {
+  //   SUBWAYEND: "성수",
+  //   DISCOMFORT_LEVEL: 49.3,
+  //   ARRIVETIME: "12:07:30",
+  //   CONGESTION_LIST: [
+  //     "50",
+  //     "76",
+  //     "73",
+  //     "65",
+  //     "30",
+  //     "42",
+  //     "30",
+  //     "54",
+  //     "30",
+  //     "43",
+  //   ],
+  //   CURRENT_MIN_CONGESTION_CAR: 9,
+  //   PREDICTION: {
+  //     PRED_CONGESTION: [
+  //       {
+  //         이대: [
+  //           43.01778793334961, 46.161434173583984, 63.19164276123047,
+  //           64.3061294555664, 80.9529037475586, 65.91194152832031,
+  //           64.77896118164062, 59.00312042236328, 54.280479431152344,
+  //           50.22624969482422,
+  //         ],
+  //       },
+  //       {
+  //         아현: [
+  //           10.875320434570312, 14.028264045715332, 10.036967277526855,
+  //           5.990289211273193, 8.8689603805542, 7.987982749938965,
+  //           9.896718978881836, 8.075178146362305, 8.897831916809082,
+  //           4.963064193725586,
+  //         ],
+  //       },
+  //       {
+  //         충정로: [
+  //           34.07307815551758, 33.937744140625, 32.952293395996094,
+  //           36.92657470703125, 38.0701904296875, 43.908817291259766,
+  //           33.98743438720703, 38.91814041137695, 29.91132164001465,
+  //           25.074451446533203,
+  //         ],
+  //       },
+  //     ],
+  //     MIN_MEAN_INDEX: 1,
+  //     MIN_VALUE_INDEX: 10,
+  //     MEAN_ARRAY: [
+  //       25.799108505249023, 31.308887481689453, 34.5000114440918,
+  //       35.23606872558594, 36.77616500854492, 34.39113235473633,
+  //       34.81535720825195, 30.413990020751953, 28.254932403564453,
+  //       26.6827335357666,
+  //     ],
+  //   },
+  // };
   // useEffect(() => {
-  //   const fetchSubwayData = async (start, end) => {
-  //     const url = `${BASE_URL}/subway/analyze/`;
-  //     // const url = `${BASE_URL}/subway`;
-  //     try {
-  //       const response = await axios.get(url, {
-  //         params: {
-  //           start_station: start,
-  //           end_station: end,
-  //         },
-  //         headers: {
-  //           accept: "application/json",
-  //         },
-  //       });
-  //       console.log(start);
-  //       console.log(end);
-  //       console.log(response);
-  //       console.log("data", response.data);
-  //       // Process the PRED_CONGESTION data
-  //       // const congestionData = extractCongestionData(response.data);
+  //   setSubwayData(dummy);
+  // }, []);
 
-  //       setSubwayData(response.data);
+  useEffect(() => {
+    const fetchSubwayData = async (start, end) => {
+      const url = `${BASE_URL}/subway/analyze/`;
+      // const url = `${BASE_URL}/subway`;
+      try {
+        const response = await axios.get(url, {
+          params: {
+            start_station: start,
+            end_station: end,
+          },
+          headers: {
+            accept: "application/json",
+          },
+        });
+        console.log(start);
+        console.log(end);
+        console.log(response);
+        console.log("data", response.data);
+        // const congestionData = extractCongestionData(response.data);
 
-  //       // console.log("subway data", subwayData);
-  //     } catch (error) {
-  //       setSubwayData(null);
-  //       console.error("Error:", error);
-  //     }
-  //   };
-  //   // console.log(start);
-  //   // console.log(end);
-  //   fetchSubwayData(start, end);
-  //   console.log("subway data", subwayData);
-  // }, [start, end]);
+        setSubwayData(response.data);
+
+        // console.log("subway data", subwayData);
+      } catch (error) {
+        setSubwayData(null);
+        console.error("Error:", error);
+      }
+    };
+    // console.log(start);
+    // console.log(end);
+    fetchSubwayData(start, end);
+    console.log("subway data", subwayData);
+  }, [start, end]);
 
   if (!subwayData) return <Loader />;
 
