@@ -201,7 +201,11 @@ const Analyze = () => {
         <AnalyzeItem>
           <Subtitle>📍 경로 간 평균 혼잡도</Subtitle>
 
-          <CongestionList congestionList={subwayData?.CONGESTION_LIST} />
+          <CongestionList
+            congestionList={subwayData?.PREDICTION.MEAN_ARRAY.map((value) =>
+              Math.round(value)
+            )}
+          />
         </AnalyzeItem>
       </AnalyzeContext>
 
